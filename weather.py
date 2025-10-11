@@ -25,6 +25,7 @@ def convert_date(iso_string):
         A date formatted like: Weekday Date Month Year e.g. Tuesday 06 July 2021
     """
     pass
+#stack overflow help from here: https://stackoverflow.com/questions/3042081/python-how-to-convert-iso-8601-string-to-datetime
 
 
 def convert_f_to_c(temp_in_fahrenheit):
@@ -47,6 +48,7 @@ def calculate_mean(weather_data):
         A float representing the mean value.
     """
     pass
+#sum function help from here: https://www.programiz.com/python-programming/methods/built-in/sum
 
 
 def load_data_from_csv(csv_file):
@@ -58,6 +60,8 @@ def load_data_from_csv(csv_file):
         A list of lists, where each sublist is a (non-empty) line in the csv file.
     """
     pass
+#csv help from here: https://docs.python.org/3/library/csv.html
+#use CSV reader as used in todays class 
 
 
 def find_min(weather_data):
@@ -69,6 +73,7 @@ def find_min(weather_data):
         The minimum value and it's position in the list. (In case of multiple matches, return the index of the *last* example in the list.)
     """
     pass
+#get list of numbers 
 
 
 def find_max(weather_data):
@@ -91,7 +96,7 @@ def generate_summary(weather_data):
         A string containing the summary information.
     """
     pass
-
+#how to handle multiple lines f string: https://stackoverflow.com/questions/17611938/python-multiline-string-without-newline
 
 def generate_daily_summary(weather_data):
     """Outputs a daily summary for the given weather data.
