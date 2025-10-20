@@ -3,6 +3,7 @@ from datetime import datetime
 
 DEGREE_SYMBOL = u"\N{DEGREE SIGN}C"
 
+#use function challenge also 
 
 def format_temperature(temp):
     """Takes a temperature and returns it in string format with the degrees
@@ -13,6 +14,9 @@ def format_temperature(temp):
     Returns:
         A string contain the temperature and "degrees Celcius."
     """
+    #use unicode for degree symbol
+    #DEGREE_SYMBOL = u"\N{DEGREE SIGN}C"
+    
     return f"{temp}{DEGREE_SYMBOL}"
 
 
@@ -23,9 +27,13 @@ def convert_date(iso_string):
         iso_string: An ISO date string.
     Returns:
         A date formatted like: Weekday Date Month Year e.g. Tuesday 06 July 2021
-    """
-    pass
-#stack overflow help from here: https://stackoverflow.com/questions/3042081/python-how-to-convert-iso-8601-string-to-datetime
+    """   
+#https://www.geeksforgeeks.org/python/python-strftime-function/
+#from datetime import datetime << This is already imported at the top
+    dt = datetime.fromisoformat(iso_string)
+    convert_date = dt.strftime("%A %d %B %Y")
+    return convert_date
+
 
 
 def convert_f_to_c(temp_in_fahrenheit):
@@ -36,7 +44,10 @@ def convert_f_to_c(temp_in_fahrenheit):
     Returns:
         A float representing a temperature in degrees Celcius, rounded to 1 decimal place.
     """
-    pass
+    celsius = (float(temp_in_fahrenheit) - 32) * 5 / 9
+    return round(celsius,1)
+#print(convert_f_to_c(77)) #USE THIS FOR TESTING PURPOSES
+
 
 
 def calculate_mean(weather_data):
@@ -47,8 +58,19 @@ def calculate_mean(weather_data):
     Returns:
         A float representing the mean value.
     """
-    pass
+    #for the variable name in weather data list
+
 #sum function help from here: https://www.programiz.com/python-programming/methods/built-in/sum
+    total = 0
+    for each_number in weather_data:
+        #print(each_number)
+        total = total + float(each_number)
+    #get mean by dividing sum by length of list
+    mean = total/len(weather_data)
+    return mean
+#weather_data = [51,50.1,49.5,48.2,47.8]
+#print(f"mean temp {calculate_mean(weather_data)}")
+#GOOGLE HOW TO SUM EVERYTHING IN LIST
 
 
 def load_data_from_csv(csv_file):
@@ -59,7 +81,17 @@ def load_data_from_csv(csv_file):
     Returns:
         A list of lists, where each sublist is a (non-empty) line in the csv file.
     """
-    pass
+    data = []
+    # Opening the file to read from
+    with open(csv_file) as file: #load the data and go to the csv file csv_file in a function
+        reader = csv.reader(file)  # 2. Set up our reader
+        next(reader) # 3. ignore the header line and just look at data
+        for row in reader: # 4. for each row in our file...
+            if row: # 5 skip empty rows
+            # update the types of our data turning numbers into int.
+                updated_row = [row[0],int(row[1]),int(row[2])]
+                data.append(updated_row)
+    return data
 #csv help from here: https://docs.python.org/3/library/csv.html
 #use CSV reader as used in todays class 
 
@@ -72,9 +104,20 @@ def find_min(weather_data):
     Returns:
         The minimum value and it's position in the list. (In case of multiple matches, return the index of the *last* example in the list.)
     """
-    pass
-#get list of numbers 
 
+#get list of numbers 
+    if not weather_data:
+        return ()
+    min_value = float(weather_data[0])
+    min_position = 0
+
+    for i in range (1, len(weather_data)):
+        value = float(weather_data[i])
+        if value <= min_value:
+            min_value = value
+            min_position = i
+
+    return (min_value, min_position)
 
 def find_max(weather_data):
     """Calculates the maximum value in a list of numbers.
@@ -84,7 +127,18 @@ def find_max(weather_data):
     Returns:
         The maximum value and it's position in the list. (In case of multiple matches, return the index of the *last* example in the list.)
     """
-    pass
+    if not weather_data:       #if somehting is not a number or empty then skip by returning ()
+        return ()
+    max_value = float(weather_data[0])
+    max_position = 0
+
+    for i in range (1, len(weather_data)):
+        value = float(weather_data[i])
+        if value >= max_value:
+            max_value = value
+            max_position = i
+            
+    return (max_value, max_position)
 
 
 def generate_summary(weather_data):
@@ -95,8 +149,15 @@ def generate_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-    pass
+    
+#look at generate summary
 #how to handle multiple lines f string: https://stackoverflow.com/questions/17611938/python-multiline-string-without-newline
+#5 Day Overview
+#  The lowest temperature will be 9.4°C, and will occur on Friday 02 July 2021.
+#  The highest temperature will be 20.0°C, and will occur on Saturday 03 July 2021.
+#  The average low this week is 12.2°C.
+#  The average high this week is 17.8°C.
+
 
 def generate_daily_summary(weather_data):
     """Outputs a daily summary for the given weather data.
@@ -106,4 +167,6 @@ def generate_daily_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-    pass
+#---- Friday 02 July 2021 ----
+#Minimum Temperature: 9.4°C
+#Maximum Temperature: 19.4°C
