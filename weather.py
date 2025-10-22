@@ -151,13 +151,50 @@ def generate_summary(weather_data):
     """
     
 #look at generate summary
-#how to handle multiple lines f string: https://stackoverflow.com/questions/17611938/python-multiline-string-without-newline
-#5 Day Overview
+#how to handle multiple lines f string: use. /n"
+#5 Day Overview.   << number of days in weather data "Day Overview" use len
 #  The lowest temperature will be 9.4°C, and will occur on Friday 02 July 2021.
 #  The highest temperature will be 20.0°C, and will occur on Saturday 03 July 2021.
 #  The average low this week is 12.2°C.
 #  The average high this week is 17.8°C.
+    
+    #if not weather_data: #if len of weather_date is. 0 return
+        #return "0 Day Overview"
+    #for weather_data
 
+    if len(weather_data) == 0:
+        return
+
+    num_days = len(weather_data)
+    dates = [row[0] for row in weather_data]
+    min_temps = [row[1] for row in weather_data] 
+    max_temps = [row[2] for row in weather_data]
+
+    # Get min and max results
+    min_result = find_min(min_temps)
+    max_result = find_max(max_temps)
+    if not min_result or not max_result:
+        return
+
+    min_temp, min_index = min_result #data that we can work with
+    max_temp, max_index = max_result #data that we can work with
+
+    
+
+    min_date = convert_date(dates[min_index])
+    max_date = convert_date(dates[max_index])
+    avg_low = calculate_mean(min_temps)
+    avg_high = calculate_mean(max_temps)
+
+    summary = (
+        f"{num_days} Day Overview\n"
+        f"  The lowest temperature will be {min_temp:}°C, and will occur on {min_date}.\n"
+        f"  The highest temperature will be {max_temp:}°C, and will occur on {max_date}.\n"
+        f"  The average low this week is {avg_low:}°C.\n"
+        f"  The average high this week is {avg_high:}°C."
+    )
+    print(summary)
+    return summary
 
 def generate_daily_summary(weather_data):
     """Outputs a daily summary for the given weather data.
