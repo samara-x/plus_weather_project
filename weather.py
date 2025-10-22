@@ -179,22 +179,43 @@ def generate_summary(weather_data):
     min_temp, min_index = min_result #data that we can work with
     max_temp, max_index = max_result #data that we can work with
 
-    
-
     min_date = convert_date(dates[min_index])
     max_date = convert_date(dates[max_index])
     avg_low = calculate_mean(min_temps)
     avg_high = calculate_mean(max_temps)
+    #put everything into a list the use for loop 
+    #then convert using for loop
 
-    summary = (
+#    celcius_temps = []
+#    all_temps = [min_temp, max_temp, avg_high, avg_low]
+#    for i in all_temps:
+#        celcius = convert_f_to_c(i)
+#        celcius_temps.append(celcius)
+#4,43,29,7
+
+#[0]
+#use index number to format        
+#need to format above results
+
+#    summary = (
+#        f"{num_days} Day Overview\n"
+#        f"  The lowest temperature will be {celcius_temps[0]:}, and will occur on {min_date}.\n"
+#        f"  The highest temperature will be {celcius_temps[1]:}, and will occur on {max_date}.\n"
+#        f"  The average low this week is {celcius_temps[3]:}.\n"
+#        f"  The average high this week is {celcius_temps[2]:}."
+#    )
+
+    summary = (cl
         f"{num_days} Day Overview\n"
-        f"  The lowest temperature will be {min_temp:}°C, and will occur on {min_date}.\n"
-        f"  The highest temperature will be {max_temp:}°C, and will occur on {max_date}.\n"
-        f"  The average low this week is {avg_low:}°C.\n"
-        f"  The average high this week is {avg_high:}°C."
+        f"  The lowest temperature will be {min_temp:}, and will occur on {min_date}.\n"
+        f"  The highest temperature will be {max_temp:}, and will occur on {max_date}.\n"
+        f"  The average low this week is {avg_low:}.\n"
+        f"  The average high this week is {avg_high:}."
     )
     print(summary)
-    return summary
+    #return summary
+
+
 
 def generate_daily_summary(weather_data):
     """Outputs a daily summary for the given weather data.
