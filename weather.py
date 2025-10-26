@@ -159,21 +159,24 @@ def generate_summary(weather_data):
 #  The average high this week is 17.8°C.
     if not weather_data:
         return "0 Day Overview"
-
+#find the number of days in the data (x Day Overview)
     num_days = len(weather_data)
+#create lists for low temps and high temps
     low_temps = [day[1] for day in weather_data]
     high_temps = [day[2] for day in weather_data]
+#find min & max low temp & index
     min_low, min_index = find_min(low_temps)
     max_high, max_index = find_max(high_temps)
+#find average low & high temps
     avg_low = calculate_mean(low_temps)
     avg_high = calculate_mean(high_temps)
-
+#summmary with formatting and conversion of temps and dates
     summary = (f"{num_days} Day Overview\n"
             f"  The lowest temperature will be {format_temperature(convert_f_to_c(min_low))}, and will occur on {convert_date(weather_data[min_index][0])}.\n"
             f"  The highest temperature will be {format_temperature(convert_f_to_c(max_high))}, and will occur on {convert_date(weather_data[max_index][0])}.\n"
             f"  The average low this week is {format_temperature(round(convert_f_to_c(avg_low),1))}.\n"
             f"  The average high this week is {format_temperature(round(convert_f_to_c(avg_high),1))}.\n")
-    print(summary)
+    
     return summary
 
 def generate_daily_summary(weather_data):
@@ -184,16 +187,23 @@ def generate_daily_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-#---- Friday 02 July 2021 ----
-#Minimum Temperature: 9.4°C
-#Maximum Temperature: 19.4°C
+
+#for each day [0] create a new list []
+#index [1] for min temp index [2] for max temp
+
+    if not weather_data:
+        return "No Data"
+
     daily_summary = ""
+    
     for day in weather_data:
         date = convert_date(day[0])
-        min_temp = format_temperature(round(convert_f_to_c(day[1]),1))
-        max_temp = format_temperature(round(convert_f_to_c(day[2]),1))
+        min_temp = format_temperature(convert_f_to_c(day[1]))
+        max_temp = format_temperature(convert_f_to_c(day[2]))
         
-        daily_summary = (f"---- {date} ----\n"
-                f"Minimum Temperature: {min_temp}\n"
-                f"Maximum Temperature: {max_temp}\n")
+        daily_summary += (
+            f"---- {date} ----\n"
+            f"  Minimum Temperature: {min_temp}\n"
+            f"  Maximum Temperature: {max_temp}\n\n"
+        )
     return daily_summary
