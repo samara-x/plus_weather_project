@@ -28,8 +28,8 @@ def convert_date(iso_string):
     Returns:
         A date formatted like: Weekday Date Month Year e.g. Tuesday 06 July 2021
     """   
-#https://www.geeksforgeeks.org/python/python-strftime-function/
-#from datetime import datetime << This is already imported at the top
+    #https://www.geeksforgeeks.org/python/python-strftime-function/
+    #from datetime import datetime << This is already imported at the top
     dt = datetime.fromisoformat(iso_string)
     convert_date = dt.strftime("%A %d %B %Y")
     return convert_date
@@ -42,11 +42,11 @@ def convert_f_to_c(temp_in_fahrenheit):
     Args:
         temp_in_fahrenheit: float representing a temperature.
     Returns:
-        A float representing a temperature in degrees Celcius, rounded to 1 decimal place.
+        A float representing a temperature in dgitegrees Celcius, rounded to 1 decimal place.
     """
     celsius = (float(temp_in_fahrenheit) - 32) * 5 / 9
     return round(celsius,1)
-#print(convert_f_to_c(77)) #USE THIS FOR TESTING PURPOSES
+    #print(convert_f_to_c(77)) #USE THIS FOR TESTING PURPOSES
 
 
 
@@ -92,8 +92,8 @@ def load_data_from_csv(csv_file):
                 updated_row = [row[0],int(row[1]),int(row[2])]
                 data.append(updated_row)
     return data
-#csv help from here: https://docs.python.org/3/library/csv.html
-#use CSV reader as used in todays class 
+    #csv help from here: https://docs.python.org/3/library/csv.html
+    #use CSV reader as used in todays class 
 
 
 def find_min(weather_data):
@@ -104,7 +104,6 @@ def find_min(weather_data):
     Returns:
         The minimum value and it's position in the list. (In case of multiple matches, return the index of the *last* example in the list.)
     """
-
 #get list of numbers 
     if not weather_data:
         return ()
@@ -127,7 +126,7 @@ def find_max(weather_data):
     Returns:
         The maximum value and it's position in the list. (In case of multiple matches, return the index of the *last* example in the list.)
     """
-    if not weather_data:       #if somehting is not a number or empty then skip by returning ()
+    if not weather_data:    #if somehting is not a number or empty then skip by returning ()
         return ()
     max_value = float(weather_data[0])
     max_position = 0
